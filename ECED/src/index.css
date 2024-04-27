@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Spectral+SC&display=swap");
+
+@layer html {
+  :root {
+    --toastify-color-light: #ed3a3a;
+    --toastify-text-color-light: #ddd6fe;
+  }
+
+  input,
+  select,
+  textarea {
+    background-color: transparent;
+    display: block;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .select-img {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(65, 84, 98)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-position: center right 1px;
+    background-size: 1rem auto;
+    background-repeat: no-repeat;
+  }
+
+  .radio:has(input:checked) {
+    color: #fa8b8b;
+    font-weight: bold;
+  }
+
+  select:disabled {
+    background-image: none;
+  }
+
+  .outlet-border {
+    border-color: #ffffff;
+    border-width: 4px;
+    border-radius: 0.75rem;
+  }
+
+  #nav a.active {
+    background-color: #951d1d;
+    border-radius: 0.375rem;
+  }
+
+  #register a.active {
+    color: #f65c5c !important;
+  }
+
+  #resister #root .toast {
+    color: #651010 !important;
+  }
+  #root .toast-body {
+    color: #651010 !important;
+  }
+  #root .toast-rounded {
+    border-radius: 6px !important;
+    background-color: #e4e0fa !important;
+  }
+
+  .scrollWidth:-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollWidth {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* #root .toast-progress {
+    background: #6d28d9 !important;
+  } */
+
+  @media (prefers-color-scheme: dark) {
+    #nav a.active {
+      background-color: #d92828;
+      border-radius: 0.375rem;
+    }
+    #register a.active {
+      color: #951d1d;
+    }
+    option {
+      background-color: #cbd5e1;
+      color: #0f172a;
+    }
+    #root .toast {
+      color: #e4e0fa !important;
+    }
+    #root .toast-body {
+      color: #e4e0fa !important;
+    }
+    #root .toast-rounded {
+      border-radius: 6px !important;
+      background-color: #ffffff !important;
+    }
+  }
+}
