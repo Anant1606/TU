@@ -9,6 +9,8 @@ import { PiBooks, PiUser, PiStudent } from "react-icons/pi";
 import { useContext, useEffect } from "react";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
+import CircleDesign from "./CircleDesign";
+
 
 const Dash = () => {
   const { user, setPaperList } = useContext(UserContext);
@@ -20,10 +22,10 @@ const Dash = () => {
     };
     getPapers();
   }, [setPaperList, user]);
-
+    
   return (
-    <main className="self-center">
-      <h2 className="m-6 mx-auto text-center text-6xl font-bold dark:text-slate-400">
+<main  style={{backgroundImage: 'url("https://images.adsttc.com/media/images/5bf3/8f5f/08a5/e509/1100/01ce/newsletter/-_Featured_Image.jpg?1542688591")', color: '#000'}}>
+      <h2 className="m-6 mx-auto text-center text-6xl font-bold dark:text-slate-400" style={{color: '#000'}}>
         Dashboard
       </h2>
       <div className="grid grid-cols-1 place-content-center gap-3 px-1 py-4 lg:grid-cols-2 lg:gap-4 lg:px-8 xl:grid-cols-3">

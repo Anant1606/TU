@@ -100,3 +100,8 @@
     }
   }
 }
+.full-page {
+  background-image: 'url("https://images.adsttc.com/media/images/5bf3/8f5f/08a5/e509/1100/01ce/newsletter/-_Featured_Image.jpg?1542688591")';
+  background-size: cover;
+  background-position: center;
+}
