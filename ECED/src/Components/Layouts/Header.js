@@ -14,15 +14,14 @@ const Header = () => {
     toast.info("Logged Out");
   };
   return (
-    <header className="absolute top-0 flex w-full justify-between bg-slate-950 text-slate-50 dark:bg-slate-950 ">
+    <header className="absolute top-0 flex w-full justify-between" style={{ backgroundColor: '#DADAFF', color: '#50B5A4' }}>
       <Link
         to="/dash"
         className="ml-4 flex items-center gap-2 px-3 py-1 text-2xl font-semibold sm:text-3xl"
       >
         <FaUniversity className="m-1" />
-        <h1 className="m-0 pr-1 font-spectral text-slate-50 decoration-violet-500 decoration-[3px] underline-offset-[3px] hover:underline">
-          Thapar university
-          
+        <h1 className="m-0 pr-1 font-spectral text-slate-50 decoration-violet-500 decoration-[3px] underline-offset-[3px] hover:underline" style={{color: 'red'}}>
+          Thapar University
           
         </h1>
       </Link>

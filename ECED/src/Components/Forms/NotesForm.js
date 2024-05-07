@@ -56,7 +56,7 @@ const NotesForm = () => {
   };
 
   return (
-    <main className="notes">
+    <main className="notes" style={{color:'black'}}>
       <h2 className="mb-2 mt-3 text-6xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400">
         {paper?.paper}
       </h2>

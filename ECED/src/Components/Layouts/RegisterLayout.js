@@ -12,9 +12,14 @@ const RegisterLayout = () => {
     <main
       id="register"
       className="relative z-0 flex h-screen items-center justify-center bg-gradient-to-b from-slate-400 to-slate-300 py-8 text-slate-900 dark:from-slate-800 dark:to-slate-950 dark:text-slate-200"
+      style={{
+        backgroundImage: 'url("https://images.adsttc.com/media/images/5bf3/8f5f/08a5/e509/1100/01ce/newsletter/-_Featured_Image.jpg?1542688591")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
-      <CircleDesign />
-      <section className="my-8 flex h-fit w-fit animate-fadeInFast flex-col justify-start gap-6 rounded-md bg-slate-100 p-4 text-slate-900 opacity-70 hover:opacity-100 focus:opacity-100 dark:bg-[#060913] dark:text-slate-50 md:p-8 lg:flex-row xl:w-1/2 ">
+      
+      <section className="my-8 flex h-fit w-fit animate-fadeInFast flex-col justify-start gap-6 rounded-md bg-slate-100 p-4 text-slate-900 opacity-70  focus:opacity-100 dark:bg-[#060913] dark:text-slate-50 md:p-8 lg:flex-row xl:w-1/2 ">
         <div className="flex flex-col-reverse justify-between lg:flex-col ">
           <h1 className="text-4xl font-semibold lg:text-5xl">
             {location === "/register/reg_teacher" ? "Teacher" : "Student"}

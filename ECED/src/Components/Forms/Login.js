@@ -84,7 +84,7 @@ const Login = () => {
 
 
 
-          <section className="z-0 w-[65%] justify-self-center rounded-lg bg-slate-100 opacity-80 hover:opacity-100 focus:opacity-100 dark:bg-[#060913] sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)]">
+          <section className="z-0 w-[65%] justify-self-center rounded-lg bg-slate-100 opacity-80  focus:opacity-100 dark:bg-[#060913] sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)]">
             <form
               className="tracking-wide placeholder-text-slate-200 dark:placeholder-text-violet-200"
               onSubmit={(e) => handleLogin(e)}

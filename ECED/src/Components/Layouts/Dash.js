@@ -21,10 +21,11 @@ const Dash = () => {
       setPaperList(response.data);
     };
     getPapers();
-  }, [setPaperList, user]);
+}, [setPaperList, user]);
     
   return (
-<main  style={{backgroundImage: 'url("https://images.adsttc.com/media/images/5bf3/8f5f/08a5/e509/1100/01ce/newsletter/-_Featured_Image.jpg?1542688591")', color: '#000'}}>
+<main style={{color:'black'}}
+        >
       <h2 className="m-6 mx-auto text-center text-6xl font-bold dark:text-slate-400" style={{color: '#000'}}>
         Dashboard
       </h2>
