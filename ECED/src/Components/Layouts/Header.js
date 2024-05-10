@@ -19,11 +19,11 @@ const Header = () => {
         to="/dash"
         className="ml-4 flex items-center gap-2 px-3 py-1 text-2xl font-semibold sm:text-3xl"
       >
-        <FaUniversity className="m-1" />
-        <h1 className="m-0 pr-1 font-spectral text-slate-50 decoration-violet-500 decoration-[3px] underline-offset-[3px] hover:underline" style={{color: 'red'}}>
-          Thapar University
-          
-        </h1>
+        
+        <h1 className="flex items-center m-0 pr-1 font-spectral text-slate-50 decoration-violet-500 decoration-[3px] underline-offset-[3px] hover:underline" style={{color: 'red'}}>
+  <img src="https://d2lk14jtvqry1q.cloudfront.net/media/small_Thapar_Institute_of_Engineering_and_Technology_Thapar_University_06036259ee_6f106c6e8b_15190eeeb2_65b1d7ffa3.png" className="w-50 h-20 mr-2" />
+</h1>
+
       </Link>
       <Link
         to="./"
