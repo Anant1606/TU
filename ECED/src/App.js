@@ -32,6 +32,7 @@ import TeacherForm from "./Components/Forms/TeacherForm";
 import StudentForm from "./Components/Forms/StudentForm";
 import NotesForm from "./Components/Forms/NotesForm";
 import TimeScheduleForm from "./Components/Forms/TimeScheduleForm";
+import ResearchPaperForm from "./Components/Forms/ReserchPaperForm";
 import Login from "./Components/Forms/Login";
 
 // lazy loading user specific components
@@ -65,6 +66,7 @@ function App() {
           <Route path="internal" element={<InternalLayout />} />
           <Route path="time_schedule" element={<TimeScheduleForm />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="ResearchPaper" element={<ResearchPaperForm />} />
           <Route
             path="approve_teacher"
             element={

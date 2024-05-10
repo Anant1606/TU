@@ -55,6 +55,19 @@ const Dash = () => {
             </p>
           </div>
         </Link>
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./ResearchPaper"}
+        >
+          <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
+          <div className="font-semibold">
+            Reserch Paper
+            <p className="text-sm font-normal lg:text-base ">
+              Add or Edit Reserch Paper
+            </p>
+          </div>
+        </Link>
+        
 
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"

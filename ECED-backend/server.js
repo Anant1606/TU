@@ -34,6 +34,7 @@ app.use("/attendance", require("./routes/attendanceRoutes"));
 app.use("/time_schedule", require("./routes/timeScheduleRoutes"));
 app.use("/teacher", require("./routes/teacherRoutes"));
 app.use("/student", require("./routes/studentRoutes"));
+app.use("/ReserchPaper", require("./routes/reserchpaper"));
 
 app.all("*", (req, res) => {
   res.status(404);
