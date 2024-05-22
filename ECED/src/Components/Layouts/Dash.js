@@ -68,6 +68,7 @@ const Dash = () => {
           </div>
         </Link>
         
+        
 
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
@@ -109,6 +110,7 @@ const Dash = () => {
                 </p>
               </div>
             </Link>
+
 
             <Link
               className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
@@ -154,6 +156,18 @@ const Dash = () => {
             </p>
           </div>
         </Link>
+        <Link
+              className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+              to={"./ResPaper"}
+            >
+              <BiBookAdd className="text-[2.5rem] lg:text-[4rem] " />
+              <div className="font-semibold">
+              View Your Reserch Paper
+                <p className="text-sm font-normal lg:text-base ">
+                  Add a New Paper
+                </p>
+              </div>
+            </Link>
       </div>
     </main>
   );
