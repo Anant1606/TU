@@ -8,7 +8,7 @@ const Profile = () => {
   const { user } = React.useContext(UserContext);
   const [profile, setProfile] = React.useState({});
 
-  React.useEffect(() => {
+  React.useEffect(() => { 
     const getProfile = async () => {
       const response = await axios.get(`${user.userType}/${user._id}`);
       setProfile(response.data);
@@ -17,16 +17,16 @@ const Profile = () => {
   }, [user]);
 
   return (
-    <main className="flex w-full flex-col justify-center md:w-fit">
+    <main className="flex w-full flex-col justify-center md:w-fit" style={{ color: 'black' }}>
       {profile.name ? (
         <>
-          <div className=" my-4 flex w-full justify-center overflow-auto dark:border-slate-500 dark:p-[1px]">
+          <div className=" my-4 flex w-full justify-center overflow-auto dark:border-slate-500 dark:p-[1px]" >
             {user.userType === "teacher" ? (
               <PiUserThin className="m-2 rounded-full border-2 border-slate-900 p-1 text-6xl dark:border-slate-300 md:p-2 md:text-9xl lg:text-[12rem]" />
             ) : (
               <PiStudentThin className="m-2 rounded-full border-2 border-slate-900 p-1 text-6xl font-light dark:border-slate-300 md:p-2 md:text-9xl lg:text-[12rem]" />
             )}
-            <div className="flex flex-col items-start justify-center">
+            <div className="flex flex-col items-start justify-center" style={{ color: 'black' }}>
               <h2 className=" whitespace-break-spaces text-3xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
                 {user?.name}
               </h2>
