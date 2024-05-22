@@ -23,6 +23,7 @@ import RegisterLayout from "./Components/Layouts/RegisterLayout";
 
 // queries
 import Paper from "./Components/Queries/Paper";
+import ResPaper from "./Components/Queries/ReserchPaper";
 import Notes from "./Components/Queries/Notes";
 import StudentsList from "./Components/Queries/StudentsList";
 import Profile from "./Components/Queries/Profile";
@@ -58,6 +59,7 @@ function App() {
         >
           <Route index element={<Dash />} />
           <Route path="paper" element={<Paper />} />
+          <Route path="ResPaper" element={<ResPaper />} />
           <Route path="paper/:paper" element={<Notes />} />
           <Route path="paper/:paper/add" element={<NotesForm />} />
           <Route path="paper/:paper/:note/edit" element={<NotesForm />} />
