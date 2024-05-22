@@ -5,6 +5,7 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState("");
   const [paper, setPaper] = useState("");
+  const [Respaper, setResPaper] = useState("");
   const [paperList, setPaperList] = useState([]);
   const [notes, setNotes] = useState([]);
 
@@ -17,6 +18,7 @@ export const UserProvider = ({ children }) => {
         setPaper,
         paperList,
         setPaperList,
+        Respaper, setResPaper,
         notes,
         setNotes,
       }}

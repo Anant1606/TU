@@ -60,6 +60,7 @@ function App() {
           <Route index element={<Dash />} />
           <Route path="paper" element={<Paper />} />
           <Route path="ResPaper" element={<ResPaper />} />
+          <Route path="ResPaper/:Respaper" element={<ResPaper />} />
           <Route path="paper/:paper" element={<Notes />} />
           <Route path="paper/:paper/add" element={<NotesForm />} />
           <Route path="paper/:paper/:note/edit" element={<NotesForm />} />
