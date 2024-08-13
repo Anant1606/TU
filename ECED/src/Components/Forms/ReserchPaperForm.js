@@ -5,6 +5,10 @@ import UserContext from "../../Hooks/UserContext";
 import { toast } from "react-toastify";
 import { FaPlus } from "react-icons/fa";
 import ErrorStrip from "../ErrorStrip";
+// import storage from './firebase'
+import { storage } from "./firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 
 const ResearchPaperForm = () => {
   const { user } = useContext(UserContext);
@@ -51,6 +55,38 @@ const ResearchPaperForm = () => {
       ...newResearchPaper,
       [e.target.id]: e.target.value,
     });
+  };
+
+  // upload pdf tot firebase 
+
+  const [file, setFile] = useState(null);
+  const [progress, setProgress] = useState(0);
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUpload = () => {
+    if (!file) return;
+
+    const storageRef = ref(storage, `/pdfs/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setProgress(progress);
+      },
+      (error) => {
+        console.error("Upload failed:", error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+        });
+      }
+    );
   };
 
   return (
@@ -151,9 +187,15 @@ const ResearchPaperForm = () => {
                 </option>
               ))}
             </select>
+            <div>
+      <input type="file" accept="application/pdf" onChange={handleFileChange} />
+      {/* <button>Upload PDF</button> */}
+      <p>Upload Progress: {progress}%</p>
+    </div>
             <button
               className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900"
               type="submit"
+              onClick={handleUpload}
             >
               <FaPlus />
               Add

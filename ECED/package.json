@@ -1,14 +1,14 @@
 {
   "name": "ECED",
   "version": "0.9.0",
-  
   "description": "Tiet lms by anant and ekansh",
   "private": true,
   "dependencies": {
     "@fvilers/disable-react-devtools": "^1.3.0",
     "axios": "^1.6.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "firebase": "^10.12.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.22.1",
     "react-scripts": "^5.0.1",
@@ -44,5 +44,4 @@
     "prettier-plugin-tailwindcss": "^0.4.1"
   },
   "proxy": "http://localhost:3500"
-  
 }
