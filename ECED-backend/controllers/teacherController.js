@@ -129,7 +129,119 @@ const approveTeacher = asyncHandler(async (req, res) => {
 
   res.json({ message: "Teacher Approved" });
 });
+// @desc Edit Teacher Profile
+// @route PATCH /Teacher/edit
+// @access Private
+const editTeacher = asyncHandler(async (req, res) => {
+  const {
+    id,
+    name,
+    dateOfBirth,
+    employeeId,
+    panNumber,
+    aadharNumber,
+    mobileNumber,
+    whatsappNumber,
+    dateOfJoining,
+    dateOfRegularAppointment,
+    dateOfAP1Appointment,
+    dateOfAP2Appointment,
+    dateOfAP3Appointment,
+    dateOfAssociateProfessorAppointment,
+    dateOfProfessorAppointment,
+    numberOfPhdGuided,
+    numberOfPhdOngoing,
+    numberOfMeMtechGuided,
+    numberOfMeMtechOngoing,
+    numberOfBeBtechProjectGuided,
+    numberOfBeBtechProjectOngoing,
+    hIndex,
+    i10Index,
+    totalCitationGoogleScholar,
+    totalCitationWebOfScience,
+    totalJournalPublications,
+    totalConferencePublications,
+    totalBookChapterPublications,
+    totalBookPublications,
+    totalPatentPublications,
+    orcidId,
+    tietWebsiteProfileLink,
+    googleScholarLink,
+    dblpLink,
+    vidwaanLink,
+    totalExternalProjects,
+    amountExternalProjects,
+    totalInternalProjects,
+    amountInternalProjects,
+    totalConsultancyProvided,
+    amountConsultancyProjects,
+    collaboration,
+    collaborators,
+    numberOfProjectsSubmitted,
+    reviewerOfJournal,
+  } = req.body;
 
+  // Confirm Data
+  if (!id) {
+    return res.status(400).json({ message: "ID is required" });
+  }
+
+  // Find Teacher
+  const teacher = await Teacher.findById(id).exec();
+  if (!teacher) {
+    return res.status(404).json({ message: "Teacher not found" });
+  }
+
+  // Update Fields
+  teacher.name = name || teacher.name;
+  teacher.dateOfBirth = dateOfBirth || teacher.dateOfBirth;
+  teacher.employeeId = employeeId || teacher.employeeId;
+  teacher.panNumber = panNumber || teacher.panNumber;
+  teacher.aadharNumber = aadharNumber || teacher.aadharNumber;
+  teacher.mobileNumber = mobileNumber || teacher.mobileNumber;
+  teacher.whatsappNumber = whatsappNumber || teacher.whatsappNumber;
+  teacher.dateOfJoining = dateOfJoining || teacher.dateOfJoining;
+  teacher.dateOfRegularAppointment = dateOfRegularAppointment || teacher.dateOfRegularAppointment;
+  teacher.dateOfAP1Appointment = dateOfAP1Appointment || teacher.dateOfAP1Appointment;
+  teacher.dateOfAP2Appointment = dateOfAP2Appointment || teacher.dateOfAP2Appointment;
+  teacher.dateOfAP3Appointment = dateOfAP3Appointment || teacher.dateOfAP3Appointment;
+  teacher.dateOfAssociateProfessorAppointment = dateOfAssociateProfessorAppointment || teacher.dateOfAssociateProfessorAppointment;
+  teacher.dateOfProfessorAppointment = dateOfProfessorAppointment || teacher.dateOfProfessorAppointment;
+  teacher.numberOfPhdGuided = numberOfPhdGuided || teacher.numberOfPhdGuided;
+  teacher.numberOfPhdOngoing = numberOfPhdOngoing || teacher.numberOfPhdOngoing;
+  teacher.numberOfMeMtechGuided = numberOfMeMtechGuided || teacher.numberOfMeMtechGuided;
+  teacher.numberOfMeMtechOngoing = numberOfMeMtechOngoing || teacher.numberOfMeMtechOngoing;
+  teacher.numberOfBeBtechProjectGuided = numberOfBeBtechProjectGuided || teacher.numberOfBeBtechProjectGuided;
+  teacher.numberOfBeBtechProjectOngoing = numberOfBeBtechProjectOngoing || teacher.numberOfBeBtechProjectOngoing;
+  teacher.hIndex = hIndex || teacher.hIndex;
+  teacher.i10Index = i10Index || teacher.i10Index;
+  teacher.totalCitationGoogleScholar = totalCitationGoogleScholar || teacher.totalCitationGoogleScholar;
+  teacher.totalCitationWebOfScience = totalCitationWebOfScience || teacher.totalCitationWebOfScience;
+  teacher.totalJournalPublications = totalJournalPublications || teacher.totalJournalPublications;
+  teacher.totalConferencePublications = totalConferencePublications || teacher.totalConferencePublications;
+  teacher.totalBookChapterPublications = totalBookChapterPublications || teacher.totalBookChapterPublications;
+  teacher.totalBookPublications = totalBookPublications || teacher.totalBookPublications;
+  teacher.totalPatentPublications = totalPatentPublications || teacher.totalPatentPublications;
+  teacher.orcidId = orcidId || teacher.orcidId;
+  teacher.tietWebsiteProfileLink = tietWebsiteProfileLink || teacher.tietWebsiteProfileLink;
+  teacher.googleScholarLink = googleScholarLink || teacher.googleScholarLink;
+  teacher.dblpLink = dblpLink || teacher.dblpLink;
+  teacher.vidwaanLink = vidwaanLink || teacher.vidwaanLink;
+  teacher.totalExternalProjects = totalExternalProjects || teacher.totalExternalProjects;
+  teacher.amountExternalProjects = amountExternalProjects || teacher.amountExternalProjects;
+  teacher.totalInternalProjects = totalInternalProjects || teacher.totalInternalProjects;
+  teacher.amountInternalProjects = amountInternalProjects || teacher.amountInternalProjects;
+  teacher.totalConsultancyProvided = totalConsultancyProvided || teacher.totalConsultancyProvided;
+  teacher.amountConsultancyProjects = amountConsultancyProjects || teacher.amountConsultancyProjects;
+  teacher.collaboration = collaboration || teacher.collaboration;
+  teacher.collaborators = collaborators || teacher.collaborators;
+  teacher.numberOfProjectsSubmitted = numberOfProjectsSubmitted || teacher.numberOfProjectsSubmitted;
+  teacher.reviewerOfJournal = reviewerOfJournal || teacher.reviewerOfJournal;
+
+  await teacher.save();
+
+  res.json({ message: "Teacher Profile Updated" });
+});
 // @desc Delete Teacher
 // @route DELETE /Teacher
 // @access Private
@@ -156,6 +268,7 @@ module.exports = {
   getNewTeachers,
   getTeacherList,
   createNewTeacher,
+  editTeacher,
   approveTeacher,
   deleteTeacher,
 };
