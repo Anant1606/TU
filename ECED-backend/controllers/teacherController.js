@@ -149,23 +149,23 @@ const editTeacher = asyncHandler(async (req, res) => {
     dateOfAP3Appointment,
     dateOfAssociateProfessorAppointment,
     dateOfProfessorAppointment,
-    numberOfPhdGuided,
-    numberOfPhdOngoing,
-    numberOfMeMtechGuided,
-    numberOfMeMtechOngoing,
-    numberOfBeBtechProjectGuided,
-    numberOfBeBtechProjectOngoing,
+    numberOfPhDsGuided,
+    numberOfPhDsOngoing,
+    numberOfMEMTechGuided,
+    numberOfMEMTechOngoing,
+    numberOfBEBTechProjectsGuided,
+    numberOfBEBTechProjectsOngoing,
     hIndex,
     i10Index,
-    totalCitationGoogleScholar,
-    totalCitationWebOfScience,
+    totalCitationsGoogleScholar,
+    totalCitationsWebOfScience,
     totalJournalPublications,
     totalConferencePublications,
-    totalBookChapterPublications,
+    totalBookChapters,
     totalBookPublications,
     totalPatentPublications,
     orcidId,
-    tietWebsiteProfileLink,
+    tietWebsiteLink,
     googleScholarLink,
     dblpLink,
     vidwaanLink,
@@ -173,12 +173,12 @@ const editTeacher = asyncHandler(async (req, res) => {
     amountExternalProjects,
     totalInternalProjects,
     amountInternalProjects,
-    totalConsultancyProvided,
+    totalConsultanciesProvided,
     amountConsultancyProjects,
-    collaboration,
+    collaborations,
     collaborators,
     numberOfProjectsSubmitted,
-    reviewerOfJournal,
+    journalReviewer,
   } = req.body;
 
   // Confirm Data
@@ -207,23 +207,23 @@ const editTeacher = asyncHandler(async (req, res) => {
   teacher.dateOfAP3Appointment = dateOfAP3Appointment || teacher.dateOfAP3Appointment;
   teacher.dateOfAssociateProfessorAppointment = dateOfAssociateProfessorAppointment || teacher.dateOfAssociateProfessorAppointment;
   teacher.dateOfProfessorAppointment = dateOfProfessorAppointment || teacher.dateOfProfessorAppointment;
-  teacher.numberOfPhdGuided = numberOfPhdGuided || teacher.numberOfPhdGuided;
-  teacher.numberOfPhdOngoing = numberOfPhdOngoing || teacher.numberOfPhdOngoing;
-  teacher.numberOfMeMtechGuided = numberOfMeMtechGuided || teacher.numberOfMeMtechGuided;
-  teacher.numberOfMeMtechOngoing = numberOfMeMtechOngoing || teacher.numberOfMeMtechOngoing;
-  teacher.numberOfBeBtechProjectGuided = numberOfBeBtechProjectGuided || teacher.numberOfBeBtechProjectGuided;
-  teacher.numberOfBeBtechProjectOngoing = numberOfBeBtechProjectOngoing || teacher.numberOfBeBtechProjectOngoing;
+  teacher.numberOfPhDsGuided = numberOfPhDsGuided || teacher.numberOfPhDsGuided;
+  teacher.numberOfPhDsOngoing = numberOfPhDsOngoing || teacher.numberOfPhDsOngoing;
+  teacher.numberOfMEMTechGuided = numberOfMEMTechGuided || teacher.numberOfMEMTechGuided;
+  teacher.numberOfMEMTechOngoing = numberOfMEMTechOngoing || teacher.numberOfMEMTechOngoing;
+  teacher.numberOfBEBTechProjectsGuided = numberOfBEBTechProjectsGuided || teacher.numberOfBEBTechProjectsGuided;
+  teacher.numberOfBEBTechProjectsOngoing = numberOfBEBTechProjectsOngoing || teacher.numberOfBEBTechProjectsOngoing;
   teacher.hIndex = hIndex || teacher.hIndex;
   teacher.i10Index = i10Index || teacher.i10Index;
-  teacher.totalCitationGoogleScholar = totalCitationGoogleScholar || teacher.totalCitationGoogleScholar;
-  teacher.totalCitationWebOfScience = totalCitationWebOfScience || teacher.totalCitationWebOfScience;
+  teacher.totalCitationsGoogleScholar = totalCitationsGoogleScholar || teacher.totalCitationsGoogleScholar;
+  teacher.totalCitationsWebOfScience = totalCitationsWebOfScience || teacher.totalCitationsWebOfScience;
   teacher.totalJournalPublications = totalJournalPublications || teacher.totalJournalPublications;
   teacher.totalConferencePublications = totalConferencePublications || teacher.totalConferencePublications;
-  teacher.totalBookChapterPublications = totalBookChapterPublications || teacher.totalBookChapterPublications;
+  teacher.totalBookChapters = totalBookChapters || teacher.totalBookChapters;
   teacher.totalBookPublications = totalBookPublications || teacher.totalBookPublications;
   teacher.totalPatentPublications = totalPatentPublications || teacher.totalPatentPublications;
   teacher.orcidId = orcidId || teacher.orcidId;
-  teacher.tietWebsiteProfileLink = tietWebsiteProfileLink || teacher.tietWebsiteProfileLink;
+  teacher.tietWebsiteLink = tietWebsiteLink || teacher.tietWebsiteLink;
   teacher.googleScholarLink = googleScholarLink || teacher.googleScholarLink;
   teacher.dblpLink = dblpLink || teacher.dblpLink;
   teacher.vidwaanLink = vidwaanLink || teacher.vidwaanLink;
@@ -231,17 +231,18 @@ const editTeacher = asyncHandler(async (req, res) => {
   teacher.amountExternalProjects = amountExternalProjects || teacher.amountExternalProjects;
   teacher.totalInternalProjects = totalInternalProjects || teacher.totalInternalProjects;
   teacher.amountInternalProjects = amountInternalProjects || teacher.amountInternalProjects;
-  teacher.totalConsultancyProvided = totalConsultancyProvided || teacher.totalConsultancyProvided;
+  teacher.totalConsultanciesProvided = totalConsultanciesProvided || teacher.totalConsultanciesProvided;
   teacher.amountConsultancyProjects = amountConsultancyProjects || teacher.amountConsultancyProjects;
-  teacher.collaboration = collaboration || teacher.collaboration;
+  teacher.collaborations = collaborations || teacher.collaborations;
   teacher.collaborators = collaborators || teacher.collaborators;
   teacher.numberOfProjectsSubmitted = numberOfProjectsSubmitted || teacher.numberOfProjectsSubmitted;
-  teacher.reviewerOfJournal = reviewerOfJournal || teacher.reviewerOfJournal;
+  teacher.journalReviewer = journalReviewer || teacher.journalReviewer;
 
   await teacher.save();
 
   res.json({ message: "Teacher Profile Updated" });
 });
+
 // @desc Delete Teacher
 // @route DELETE /Teacher
 // @access Private
