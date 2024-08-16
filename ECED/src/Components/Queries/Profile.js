@@ -12,14 +12,20 @@ const Profile = () => {
 
   useEffect(() => {
     const getProfile = async () => {
+      if (!user || !user._id) {
+        console.error("User object or user ID is missing");
+        return;
+      }
+
       try {
         const response = await axios.get(`/teacher/${user._id}`);
         setProfile(response.data);
-        setUpdatedProfile(response.data);
+        setUpdatedProfile({ ...response.data, id: user._id }); // Include ID in updatedProfile
       } catch (error) {
-        console.error("Error fetching profile:", error);
+        console.error("Error fetching profile:", error.response ? error.response.data : error.message);
       }
     };
+
     getProfile();
   }, [user]);
 
@@ -36,12 +42,44 @@ const Profile = () => {
   };
 
   const handleSaveChanges = async () => {
+    if (!user || !user._id) {
+      console.error("User object or user ID is missing");
+      return;
+    }
+
     try {
-      await axios.patch(`/teacher/edit/${user._id}`, updatedProfile);
-      setProfile(updatedProfile);
+      // Ensure all required fields are present
+      const requiredFields = [
+        'id', 'name', 'dateOfBirth', 'panNumber', 'aadharNumber',
+        'mobileNumber', 'whatsappNumber', 'dateOfJoining', 'dateOfRegularAppointment',
+        'dateOfAP1Appointment', 'dateOfAP2Appointment', 'dateOfAP3Appointment',
+        'dateOfAssociateProfessorAppointment', 'dateOfProfessorAppointment',
+        'numberOfPhDsGuided', 'numberOfPhDsOngoing', 'numberOfMEMTechGuided',
+        'numberOfMEMTechOngoing', 'numberOfBEBTechProjectsGuided',
+        'numberOfBEBTechProjectsOngoing', 'hIndex', 'i10Index',
+        'totalCitationsGoogleScholar', 'totalCitationsWebOfScience',
+        'totalJournalPublications', 'totalConferencePublications',
+        'totalBookChapters', 'totalBookPublications', 'totalPatentPublications',
+        'orcidId', 'tietWebsiteLink', 'googleScholarLink', 'dblpLink',
+        'vidwaanLink', 'totalExternalProjects', 'amountExternalProjects',
+        'totalInternalProjects', 'amountInternalProjects',
+        'totalConsultanciesProvided', 'amountConsultancyProjects',
+        'collaborations', 'collaborators', 'numberOfProjectsSubmitted',
+        'journalReviewer'
+      ];
+
+      for (const field of requiredFields) {
+        if (updatedProfile[field] === undefined || updatedProfile[field] === null || updatedProfile[field] === '') {
+          console.error(`Missing required field: ${field}`);
+          return;
+        }
+      }
+
+      const response = await axios.patch(`/Teacher/edit`, updatedProfile); // Send all fields in the body
+      setProfile(response.data);
       setEditing(false);
     } catch (error) {
-      console.error("Error updating profile:", error);
+      console.error("Error updating profile:", error.response ? error.response.data : error.message);
     }
   };
 
@@ -186,6 +224,7 @@ const Profile = () => {
                     )}
                   </td>
                 </tr>
+                {/* Appointment Dates */}
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
                     Date of Regular Appointment
@@ -260,24 +299,6 @@ const Profile = () => {
                 </tr>
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Date of Associate Professor Appointment
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="date"
-                        name="dateOfAssociateProfessorAppointment"
-                        value={updatedProfile.dateOfAssociateProfessorAppointment?.split('T')[0] || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      new Date(profile.dateOfAssociateProfessorAppointment).toLocaleDateString() || "N/A"
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
                     Date of Professor Appointment
                   </th>
                   <td className="px-4 py-2">
@@ -294,225 +315,61 @@ const Profile = () => {
                     )}
                   </td>
                 </tr>
-                {/* Research and Publications */}
+                {/* Professional Information */}
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    h-index
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="hIndex"
-                        value={updatedProfile.hIndex || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.hIndex || 0
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    i10-index
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="i10Index"
-                        value={updatedProfile.i10Index || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.i10Index || 0
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Total Citations (Google Scholar)
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="totalCitationsGoogleScholar"
-                        value={updatedProfile.totalCitationsGoogleScholar || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.totalCitationsGoogleScholar || 0
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Total Citations (Web of Science)
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="totalCitationsWebOfScience"
-                        value={updatedProfile.totalCitationsWebOfScience || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.totalCitationsWebOfScience || 0
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Total Journal Publications
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="totalJournalPublications"
-                        value={updatedProfile.totalJournalPublications || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.totalJournalPublications || 0
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Total Conference Publications
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="totalConferencePublications"
-                        value={updatedProfile.totalConferencePublications || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.totalConferencePublications || 0
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Total Book Chapters
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="totalBookChapters"
-                        value={updatedProfile.totalBookChapters || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.totalBookChapters || 0
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Total Book Publications
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="totalBookPublications"
-                        value={updatedProfile.totalBookPublications || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.totalBookPublications || 0
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Total Patent Publications
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="totalPatentPublications"
-                        value={updatedProfile.totalPatentPublications || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.totalPatentPublications || 0
-                    )}
-                  </td>
-                </tr>
-                {/* Links */}
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    ORCID ID
+                    Employee ID
                   </th>
                   <td className="px-4 py-2">
                     {editing ? (
                       <input
                         type="text"
-                        name="orcidId"
-                        value={updatedProfile.orcidId || ""}
+                        name="employeeId"
+                        value={updatedProfile.employeeId || ""}
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 p-1"
                       />
                     ) : (
-                      profile.orcidId
+                      profile.employeeId
                     )}
                   </td>
                 </tr>
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Google Scholar ID
+                    PAN Number
                   </th>
                   <td className="px-4 py-2">
                     {editing ? (
                       <input
                         type="text"
-                        name="googleScholarId"
-                        value={updatedProfile.googleScholarId || ""}
+                        name="panNumber"
+                        value={updatedProfile.panNumber || ""}
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 p-1"
                       />
                     ) : (
-                      profile.googleScholarId
+                      profile.panNumber
                     )}
                   </td>
                 </tr>
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Scopus ID
+                    Aadhar Number
                   </th>
                   <td className="px-4 py-2">
                     {editing ? (
                       <input
                         type="text"
-                        name="scopusId"
-                        value={updatedProfile.scopusId || ""}
+                        name="aadharNumber"
+                        value={updatedProfile.aadharNumber || ""}
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 p-1"
                       />
                     ) : (
-                      profile.scopusId
+                      profile.aadharNumber
                     )}
                   </td>
                 </tr>
-                {/* Professional Metrics */}
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
                     Number of PhDs Guided
@@ -521,138 +378,108 @@ const Profile = () => {
                     {editing ? (
                       <input
                         type="number"
-                        name="numberOfPhDsGuided"
-                        value={updatedProfile.numberOfPhDsGuided || ""}
+                        name="numPhDsGuided"
+                        value={updatedProfile.numPhDsGuided || ""}
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 p-1"
                       />
                     ) : (
-                      profile.numberOfPhDsGuided || 0
+                      profile.numPhDsGuided
                     )}
                   </td>
                 </tr>
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Number of M.Tech/M.Sc Guided
+                    Journal Publications
                   </th>
                   <td className="px-4 py-2">
                     {editing ? (
                       <input
                         type="number"
-                        name="numberOfMTechGuided"
-                        value={updatedProfile.numberOfMTechGuided || ""}
+                        name="journalPublications"
+                        value={updatedProfile.journalPublications || ""}
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 p-1"
                       />
                     ) : (
-                      profile.numberOfMTechGuided || 0
+                      profile.journalPublications
                     )}
                   </td>
                 </tr>
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Number of Projects
+                    External Projects
                   </th>
                   <td className="px-4 py-2">
                     {editing ? (
                       <input
-                        type="number"
-                        name="numberOfProjects"
-                        value={updatedProfile.numberOfProjects || ""}
+                        type="text"
+                        name="externalProjects"
+                        value={updatedProfile.externalProjects || ""}
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 p-1"
                       />
                     ) : (
-                      profile.numberOfProjects || 0
+                      profile.externalProjects
                     )}
                   </td>
                 </tr>
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Number of Consultancy Projects
+                    Consultancy
                   </th>
                   <td className="px-4 py-2">
                     {editing ? (
                       <input
-                        type="number"
-                        name="numberOfConsultancyProjects"
-                        value={updatedProfile.numberOfConsultancyProjects || ""}
+                        type="text"
+                        name="consultancy"
+                        value={updatedProfile.consultancy || ""}
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 p-1"
                       />
                     ) : (
-                      profile.numberOfConsultancyProjects || 0
+                      profile.consultancy
                     )}
                   </td>
                 </tr>
                 <tr className="border-t-[1px] border-slate-400 last:border-b-0">
                   <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Number of External Collaborations
+                    Collaborations
                   </th>
                   <td className="px-4 py-2">
                     {editing ? (
                       <input
-                        type="number"
-                        name="numberOfExternalCollaborations"
-                        value={updatedProfile.numberOfExternalCollaborations || ""}
+                        type="text"
+                        name="collaborations"
+                        value={updatedProfile.collaborations || ""}
                         onChange={handleInputChange}
                         className="w-full border border-gray-300 p-1"
                       />
                     ) : (
-                      profile.numberOfExternalCollaborations || 0
+                      profile.collaborations
                     )}
                   </td>
                 </tr>
-                <tr className="border-t-[1px] border-slate-400 last:border-b-0">
-                  <th className="bg-slate-900 p-2 text-base capitalize text-slate-100">
-                    Number of Collaborations
-                  </th>
-                  <td className="px-4 py-2">
-                    {editing ? (
-                      <input
-                        type="number"
-                        name="numberOfCollaborations"
-                        value={updatedProfile.numberOfCollaborations || ""}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-1"
-                      />
-                    ) : (
-                      profile.numberOfCollaborations || 0
-                    )}
-                  </td>
-                </tr>
-                {/* Save/Cancel Buttons */}
-                {editing && (
-                  <tr>
-                    <td colSpan="2" className="text-center">
-                      <button
-                        onClick={handleSaveChanges}
-                        className="mr-4 bg-green-500 text-white p-2 rounded"
-                      >
-                        Save Changes
-                      </button>
-                      <button
-                        onClick={handleEditToggle}
-                        className="bg-red-500 text-white p-2 rounded"
-                      >
-                        Cancel
-                      </button>
-                    </td>
-                  </tr>
-                )}
               </tbody>
             </table>
-          </div>
-          {!editing && (
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={handleEditToggle}
-                className="bg-blue-500 text-white p-2 rounded"
-              >
-                Edit Profile
-              </button>
+            <div className="flex justify-end p-2">
+              {editing ? (
+                <button
+                  onClick={handleSaveChanges}
+                  className="bg-blue-500 text-white py-1 px-3 rounded"
+                >
+                  Save Changes
+                </button>
+              ) : (
+                <button
+                  onClick={handleEditToggle}
+                  className="bg-green-500 text-white py-1 px-3 rounded"
+                >
+                  Edit Profile
+                </button>
+              )}
             </div>
-          )}
+          </div>
         </>
       ) : (
         <Loading />
@@ -660,5 +487,4 @@ const Profile = () => {
     </main>
   );
 };
-
 export default Profile;
