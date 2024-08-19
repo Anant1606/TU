@@ -14,17 +14,31 @@ const FellowshipForm = () => {
     purpose: "",
     stature: "",
     awardingAgency: "",
-    year: "",
+    yearOfAward: "",
     unit: "",
-    proofLink: ""
+    proofLink: "",
+    teacher: "" // Added teacher field
   });
   const [error, setError] = useState("");
+  const [teachers, setTeachers] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getTeachers = async () => {
+      try {
+        const list = await axios.get(`/teacher/list/${user.department}`);
+        setTeachers(list.data);
+      } catch (error) {
+        console.error("Error fetching teachers:", error);
+      }
+    };
+    getTeachers();
+  }, [user]);
 
   const addFellowship = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/fellowship", newFellowship);
+      const response = await axios.post("/fellowship/fellowship", newFellowship);
       navigate("./..");
       toast.success(response.data.message);
     } catch (err) {
@@ -41,7 +55,7 @@ const FellowshipForm = () => {
 
   return (
     <>
-      {user.role === "HOD" || "admin" ? (
+      {user.role === "HOD" || user.role === "admin" || user.role === "teacher" ? (
         <main className="fellowship-form" style={{ color: "black" }}>
           <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
             Add Fellowship
@@ -102,7 +116,7 @@ const FellowshipForm = () => {
               required
               onChange={handleFormChange}
             />
-            <label htmlFor="year">Year of Award:</label>
+            <label htmlFor="yearOfAward">Year of Award:</label>
             <input
               className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400"
               type="number"
@@ -110,8 +124,8 @@ const FellowshipForm = () => {
               max="2030"
               step="1"
               required
-              id="year"
-              value={newFellowship.year}
+              id="yearOfAward"
+              value={newFellowship.yearOfAward}
               onChange={handleFormChange}
             />
             <label htmlFor="unit">Unit:</label>
@@ -134,6 +148,22 @@ const FellowshipForm = () => {
               required
               onChange={handleFormChange}
             />
+            <label htmlFor="teacher">Select Teacher:</label>
+            <select
+              className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400"
+              id="teacher"
+              name="teacher"
+              value={newFellowship.teacher}
+              onChange={handleFormChange}
+              required
+            >
+              <option defaultValue hidden>Select Teacher</option>
+              {teachers.map((teacher) => (
+                <option key={teacher._id} value={teacher._id}>
+                  {teacher.name}
+                </option>
+              ))}
+            </select>
             <button
               className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900"
               type="submit"
