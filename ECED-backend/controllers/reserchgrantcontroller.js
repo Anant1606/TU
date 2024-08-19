@@ -1,5 +1,5 @@
 const { mongoose } = require("mongoose");
-const ResearchProject = require("./../models/researchproject"); // Assuming the model name is 'ResearchProject'
+const ResearchProject = require("./../models/reserchgrant"); // Assuming the model name is 'ResearchProject'
 const asyncHandler = require("express-async-handler");
 
 const getResearchProjects = asyncHandler(async (req, res) => {

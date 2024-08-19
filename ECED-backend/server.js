@@ -38,6 +38,7 @@ app.use("/ReserchPaper", require("./routes/reserchpaper"));
 app.use("/fellowship", require("./routes/fellowship"));
 app.use("/reserchgarnt",require("./routes/reserchgrantRoutes"));
 app.use("/patent",require("./routes/patent"));
+app.use("./reserchaward",require("./routes/reserchinnovationaward"));
 
 app.all("*", (req, res) => {
   res.status(404);

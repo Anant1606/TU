@@ -1,156 +1,62 @@
-const { mongoose } = require("mongoose");
-const ResearchProject = require("./../models/researchproject"); // Adjust the path to your model file
-const asyncHandler = require("express-async-handler");
+const mongoose = require("mongoose");
 
-// Get research projects for a specific teacher
-const getResearchProjects = asyncHandler(async (req, res) => {
-  if (!req.params.teacherId) {
-    return res.status(400).json({ message: "Teacher ID Missing" });
-  }
-  const researchProjects = await ResearchProject.find({
-    teacher: req.params.teacherId,
-  })
-    .select("-students")
-    .exec();
-  if (!researchProjects || researchProjects.length === 0) {
-    return res.status(404).json({
-      message: "No Research Project(s) found",
-    });
-  }
-  res.json(researchProjects);
-});
-
-// Get all research projects
-const getAllProjects = asyncHandler(async (req, res) => {
-  const projects = await ResearchProject.aggregate([
-    {
-      $lookup: {
-        from: "teachers",
-        localField: "teacher",
-        foreignField: "_id",
-        as: "teacher",
+const researchProjectSchema = new mongoose.Schema(
+  {
+    pi: {
+      type: String, // Principal Investigator's name
+      required: true,
+    },
+    co_pi: {
+      type: String, // Co-Principal Investigator's name (optional)
+    },
+    title: {
+      type: String, // Title of the research project
+      required: true,
+    },
+    fundingAgency: {
+      type: String, // Name of the funding agency
+      required: true,
+    },
+    duration: {
+      type: String, // Duration of the project (e.g., "2 years")
+    },
+    yearOfAward: {
+      type: Number, // Year when the project was awarded
+      required: true,
+    },
+    amount: {
+      type: Number, // Funding amount received
+      required: true,
+    },
+    startDate: {
+      type: Date, // Project start date
+      required: true,
+    },
+    endDate: {
+      type: Date, // Project end date
+      required: true,
+    },
+    status: {
+      type: String, // Status of the project (e.g., "Ongoing", "Completed")
+      required: true,
+    },
+    proofs: [
+      {
+        type: String, // URL link to proof documents
+        required: true,
       },
+    ],
+    teacher: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Teacher", // Reference to the Teacher model
+      required: true, // Ensure that a project is always associated with a teacher
     },
-    {
-      $unwind: "$teacher",
-    },
-    {
-      $project: {
-        piName: 1,
-        coPiName: 1,
-        title: 1,
-        fundingAgency: 1,
-        duration: 1,
-        yearOfAward: 1,
-        amountInINR: 1,
-        startDate: 1,
-        endDate: 1,
-        status: 1,
-        proofsLink: 1,
-        "teacher.name": 1,
-      },
-    },
-  ]);
-  if (!projects || projects.length === 0) {
-    return res.status(404).json({
-      message: "No Project(s) found",
-    });
+  },
+  {
+    timestamps: true, // Automatically adds createdAt and updatedAt fields
   }
-  res.json(projects);
-});
+);
 
-// Get a specific research project by ID
-const getProject = asyncHandler(async (req, res) => {
-  if (!req.params.projectId) {
-    return res.status(400).json({ message: "Incomplete Request: Params Missing" });
-  }
-  const project = await ResearchProject.findOne({
-    _id: req.params.projectId,
-  })
-    .populate({ path: "teacher", select: "name" })
-    .exec();
-  if (!project) {
-    return res.status(404).json({
-      message: "No Project(s) found",
-    });
-  }
-  res.json(project);
-});
+const ResearchProject = mongoose.model("ResearchProject", researchProjectSchema);
 
-// Add a new research project
-const addProject = asyncHandler(async (req, res) => {
-  const { piName, coPiName, title, fundingAgency, duration, yearOfAward, amountInINR, startDate, endDate, status, proofsLink } = req.body;
-
-  // Confirm Data
-  if (!piName || !title || !fundingAgency || !yearOfAward || !amountInINR || !startDate || !endDate || !status || !proofsLink) {
-    return res.status(400).json({ message: "Incomplete Request: Fields Missing" });
-  }
-
-  // Check for Duplicates
-  const duplicate = await ResearchProject.findOne({
-    piName,
-    title,
-    fundingAgency,
-    yearOfAward,
-  }).lean().exec();
-
-  if (duplicate) {
-    return res.status(409).json({ message: "Project already exists" });
-  }
-
-  // Get the logged-in teacher's ID
-  const teacherId = req.user._id;
-
-  const projectObj = {
-    piName,
-    coPiName,
-    title,
-    fundingAgency,
-    duration,
-    yearOfAward,
-    amountInINR,
-    startDate,
-    endDate,
-    status,
-    proofsLink,
-    teacher: teacherId, // Associate the logged-in teacher with the project
-  };
-
-  // Create and Store New Project
-  const record = await ResearchProject.create(projectObj);
-
-  if (record) {
-    res.status(201).json({
-      message: `New Project ${title} added`,
-    });
-  } else {
-    res.status(400).json({ message: "Invalid data received" });
-  }
-});
-
-// Delete a research project
-const deleteProject = asyncHandler(async (req, res) => {
-  const { id } = req.body;
-
-  if (!id) {
-    return res.status(400).json({ message: "Project ID required" });
-  }
-
-  const record = await ResearchProject.findById(id).exec();
-
-  if (!record) {
-    return res.status(404).json({ message: "Project not found" });
-  }
-
-  await record.deleteOne();
-
-  res.json({ message: `${id} deleted` });
-});
-
-module.exports = {
-  addProject,
-  getAllProjects,
-  getResearchProjects,
-  getProject,
-  deleteProject,
-};
+module.exports = ResearchProject;
