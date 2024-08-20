@@ -40,6 +40,8 @@ app.use("/reserchgarnt",require("./routes/reserchgrantRoutes"));
 app.use("/patent",require("./routes/patent"));
 app.use("/reserchaward",require("./routes/reserchinnovationaward"));
 app.use("/journal",require("./routes/Journal"));
+app.use("/book",require("./routes/bookRoutes"));
+
 
 app.all("*", (req, res) => {
   res.status(404);
