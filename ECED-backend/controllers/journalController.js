@@ -1,4 +1,4 @@
-const JournalPaper = require("./../models/journalpaper");
+const JournalPaper = require("./../models/Journal");
 const asyncHandler = require("express-async-handler");
 
 // Get all journal papers for a specific teacher

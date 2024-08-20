@@ -6,7 +6,7 @@ const {
   getJournalPapersByTeacher,
   getJournalPaperById,
   deleteJournalPaper,
-} = require("../controllers/journalPaperController");
+} = require("../controllers/journalController");
 
 // Route to get all journal papers
 router.get("/", getAllJournalPapers);
