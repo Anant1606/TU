@@ -4,7 +4,6 @@ import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
 import { FaUniversity } from "react-icons/fa";
 import { PiStudentThin, PiUserThin, PiSpinnerGapBold } from "react-icons/pi";
-import CircleDesign from "../Layouts/CircleDesign";
 import ErrorStrip from "../ErrorStrip";
 
 const Login = () => {
