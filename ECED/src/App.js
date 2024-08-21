@@ -21,6 +21,7 @@ import AttendanceLayout from "./Components/Layouts/AttendanceLayout";
 import InternalLayout from "./Components/Layouts/InternalLayout";
 import RegisterLayout from "./Components/Layouts/RegisterLayout";
 
+
 // queries
 import Paper from "./Components/Queries/Paper";
 import ResPaper from "./Components/Queries/ReserchPaper";
@@ -36,6 +37,11 @@ import TimeScheduleForm from "./Components/Forms/TimeScheduleForm";
 import ResearchPaperForm from "./Components/Forms/ReserchPaperForm";
 import FellowshipForm from "./Components/Forms/fellowship";
 import Login from "./Components/Forms/Login";
+import SupportForm from "./Components/Forms/SupportForm";
+import ConferenceForm from "./Components/Forms/ConferenceForm";
+import FacultyDevelopmentForm from "./Components/Forms/FacultyDevelopmentForm";
+
+
 
 // lazy loading user specific components
 const TeacherApproval = lazy(() =>
@@ -53,6 +59,7 @@ function App() {
           <Route path="reg_teacher" element={<TeacherForm />} />
           <Route path="reg_student" element={<StudentForm />} />
         </Route>
+        
         <Route
           path="/dash"
           element={<Layout />}
@@ -72,6 +79,10 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="ResearchPaper" element={<ResearchPaperForm />} />
           <Route path="fellowship" element={<FellowshipForm/>} />
+          <Route path="supportform" element={<SupportForm/>} />
+          <Route path="ConferenceForm" element={<ConferenceForm/>} />
+          <Route path="FacultyDevelopmentForm" element={<FacultyDevelopmentForm/>} />
+          
           <Route
             path="approve_teacher"
             element={

@@ -7,7 +7,6 @@ import { PiStudentThin, PiUserThin, PiSpinnerGapBold } from "react-icons/pi";
 import CircleDesign from "../Layouts/CircleDesign";
 import ErrorStrip from "../ErrorStrip";
 
-
 const Login = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
@@ -73,16 +72,14 @@ const Login = () => {
             backgroundPosition: "center",
           }}
         >
-        
-        <section className="z-0 mb-4 flex items-center gap-2 whitespace-nowrap text-6xl md:text-8xl lg:gap-4">
-  <h1
-    style={{ fontFamily: 'Jersey, sans-serif', fontWeight: 'bold', color: 'black' }}
-  >
-    ECED-TIET Patiala
-  </h1>
-</section>
-
-
+          <section className="z-0 mb-4 flex flex-col items-center gap-2 text-center">
+            <h1 style={{ fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: '3rem', color: '#8B1A1A' }}>
+              Department of Electronics and Communication Engineering
+            </h1>
+            <h2 style={{ fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: '2rem', color: '#D2691E' }}>
+              Thapar Institute of Engineering and Technology, Patiala
+            </h2>
+          </section>
 
           <section className="z-0 w-[65%] justify-self-center rounded-lg bg-slate-100 opacity-80  focus:opacity-100 dark:bg-[#060913] sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)]">
             <form
@@ -178,14 +175,19 @@ const Login = () => {
               </section>
             </form>
           </section>
+
+          {/* Footer Section */}
+          <footer className="absolute bottom-0 w-full text-center p-4 text-slate-600 dark:text-violet-200">
+            <p>&copy; {new Date().getFullYear()} Department of Electronics and Communication Engineering, TIET</p>
+            <p>Developed by DECE TIET</p>
+          </footer>
+
         </main>
       ) : (
         <Navigate to="./dash" />
       )}
     </>
-    
   );
-  
 };
 
 export default Login;

@@ -9,7 +9,12 @@ import { PiBooks, PiUser, PiStudent } from "react-icons/pi";
 import { useContext, useEffect } from "react";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
-import CircleDesign from "./CircleDesign";
+import { BiSupport } from 'react-icons/bi';
+import { BiDollar } from "react-icons/bi";
+import { FaFileAlt } from "react-icons/fa";
+import { FaMedal } from "react-icons/fa";
+import { FaChalkboardTeacher } from 'react-icons/fa';
+
 
 
 const Dash = () => {
@@ -42,6 +47,26 @@ const Dash = () => {
             </p>
           </div>
         </Link>
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./SupportForm"}
+        >
+           <BiDollar className="text-[2.5rem] lg:text-[4rem]" />{/* Icon for Support */}
+          <div className="font-semibold">
+            Financial Support Form
+            <p className="text-sm font-normal lg:text-base">Enter your Financial Support Details</p>
+          </div>
+        </Link>
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./ConferenceForm"}
+        >
+          <BiSupport className="text-[2.5rem] lg:text-[4rem]" /> {/* Icon for Support */}
+          <div className="font-semibold">
+            Conference Attended/Organized
+            <p className="text-sm font-normal lg:text-base">Enter your Conference Attended/Organized Details</p>
+          </div>
+        </Link>
 
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
@@ -59,7 +84,7 @@ const Dash = () => {
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./ResearchPaper"}
         >
-          <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
+          <FaFileAlt className="text-[2.5rem] lg:text-[4rem]" />
           <div className="font-semibold">
             Reserch Paper
             <p className="text-sm font-normal lg:text-base ">
@@ -71,7 +96,7 @@ const Dash = () => {
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./fellowship"}
         >
-          <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
+          <FaMedal className="text-[2.5rem] lg:text-[4rem]" />
           <div className="font-semibold">
             Fellowship
             <p className="text-sm font-normal lg:text-base ">
@@ -121,6 +146,16 @@ const Dash = () => {
                   Add a New Paper
                 </p>
               </div>
+            </Link>
+            <Link
+            className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+            to={"./FacultyDevelopmentForm"}
+              >
+            <FaChalkboardTeacher className="text-[2.5rem] lg:text-[4rem]" />{/* Icon for Support */}
+          <div className="font-semibold">
+            Faculty Development From(FDP)
+            <p className="text-sm font-normal lg:text-base">Enter your FDP/MDP/Orientation/Induction etc Details</p>
+          </div>
             </Link>
             
 
