@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const programSchema = new mongoose.Schema({
   type: {
     type: String,
     enum: [
-      'Professional Development Programmes', 
-      'Orientation/Induction Programmes', 
-      'Refresher Course', 
+      'Professional Development Programmes',
+      'Orientation/Induction Programmes',
+      'Refresher Course',
       'Short Term Course'
     ],
     required: true,
@@ -56,6 +56,7 @@ const programSchema = new mongoose.Schema({
   timestamps: true, // Automatically add createdAt and updatedAt fields
 });
 
-const Program = mongoose.model("Program", programSchema);
+// Avoid re-compiling the model if it already exists
+const Program = mongoose.models.Program || mongoose.model('Program', programSchema);
 
 module.exports = Program;

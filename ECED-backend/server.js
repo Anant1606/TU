@@ -45,9 +45,7 @@ app.use("./consultancy",require("./routes/consultancy"));
 app.use("./Econtent",require("./routes/Econtent"));
 app.use("./fdpconfrence",require("./routes/FDPconfrence"));
 app.use("./fdporganized",require("./routes/FDPorganized"))
-
-
-
+app.use("./Conference",require("./routes/ConfrenceRoutes"));
 
 app.all("*", (req, res) => {
   res.status(404);

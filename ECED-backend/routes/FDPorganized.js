@@ -7,21 +7,20 @@ const {
   getProgram,
   deleteProgram,
 } = require('../controllers/FDPorganized');
-const protect = require('../middleware/authMiddleware'); // Assuming you have an auth middleware to protect routes
 
 // Route to add a new program
-router.post('/', protect, addProgram);
+router.post('/', addProgram);
 
 // Route to get all programs
-router.get('/', protect, getAllPrograms);
+router.get('/',  getAllPrograms);
 
 // Route to get programs by a specific teacher
-router.get('/teacher/:teacherId', protect, getProgramsByTeacher);
+router.get('/teacher/:teacherId', getProgramsByTeacher);
 
 // Route to get a specific program by its ID
-router.get('/:programId', protect, getProgram);
+router.get('/:programId', getProgram);
 
 // Route to delete a program by its ID
-router.delete('/', protect, deleteProgram);
+router.delete('/', deleteProgram);
 
 module.exports = router;

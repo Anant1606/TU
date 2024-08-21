@@ -6,7 +6,7 @@ const {
   getPrograms,
   getProgram,
   deleteProgram,
-} = require("./../controllers/programController");
+} = require("./../controllers/FDpconfrenceController");
 
 // Route to add a new program
 router.post("/add", addProgram);
