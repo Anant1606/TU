@@ -12,6 +12,7 @@ import { UserProvider } from "./Hooks/UserContext";
 
 // components
 import Loading from "./Components/Layouts/Loading";
+
 // layouts
 import AppLayout from "./Components/Layouts/AppLayout";
 import Layout from "./Components/Layouts/Layout";
@@ -40,6 +41,8 @@ import Login from "./Components/Forms/Login";
 import SupportForm from "./Components/Forms/SupportForm";
 import ConferenceForm from "./Components/Forms/ConferenceForm";
 import FacultyDevelopmentForm from "./Components/Forms/FacultyDevelopmentForm";
+import ResearchPaperDisplay from "./Components/Forms/ResearchPaperDisplay";
+
 
 
 
@@ -81,8 +84,9 @@ function App() {
           <Route path="fellowship" element={<FellowshipForm/>} />
           <Route path="supportform" element={<SupportForm/>} />
           <Route path="ConferenceForm" element={<ConferenceForm/>} />
-          <Route path="FacultyDevelopmentForm" element={<FacultyDevelopmentForm/>} />
-          
+          <Route path="FacultyDevelopmentForm" element={<FacultyDevelopmentForm/>} />          
+          <Route path="ResearchPaperDisplay" element={<ResearchPaperDisplay/>} />
+
           <Route
             path="approve_teacher"
             element={

@@ -69,13 +69,14 @@ const Login = () => {
             backgroundImage: 'url("https://images.adsttc.com/media/images/5bf3/8f5f/08a5/e509/1100/01ce/newsletter/-_Featured_Image.jpg?1542688591")',
             backgroundSize: "cover",
             backgroundPosition: "center",
+            objectFit: 'cover',
           }}
         >
           <section className="z-0 mb-4 flex flex-col items-center gap-2 text-center">
-            <h1 style={{ fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: '3rem', color: '#8B1A1A' }}>
+            <h1 style={{ fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: '3rem', color: '#8B1A1A',fontFamily: 'Barlow, sans-serif' }}>
               Department of Electronics and Communication Engineering
             </h1>
-            <h2 style={{ fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: '2rem', color: '#D2691E' }}>
+            <h2 style={{ fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: '2rem', color: '#D2691E',fontFamily: 'Barlow, sans-serif' }}>
               Thapar Institute of Engineering and Technology, Patiala
             </h2>
           </section>
@@ -176,7 +177,9 @@ const Login = () => {
           </section>
 
           {/* Footer Section */}
-          <footer className="absolute bottom-0 w-full text-center p-4 text-slate-600 dark:text-violet-200">
+          <footer className="absolute bottom-0 w-full text-center p-4 text-slate-600 dark:text-violet-200" style={{
+            fontFamily:'sans-serif',
+          }} >
             <p>&copy; {new Date().getFullYear()} Department of Electronics and Communication Engineering, TIET</p>
             <p>Developed by DECE TIET</p>
           </footer>
