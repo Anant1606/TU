@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Spectral+SC&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap');
+
+/* Now you can use the Barlow font throughout your CSS */
+body {
+  font-family: 'Barlow', sans-serif;
+}
 
 @layer html {
   :root {

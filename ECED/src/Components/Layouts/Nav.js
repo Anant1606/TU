@@ -9,13 +9,15 @@ import { BiBookAdd } from "react-icons/bi";
 import { RiUserAddLine } from "react-icons/ri";
 import { PiStudent, PiUser, PiBooks } from "react-icons/pi";
 
+
+
 const Nav = () => {
   const { user } = useContext(UserContext);
   return (
     <nav
     id="nav"
     className="z-0 hidden h-full flex-col justify bg-slate-950 px-4 py-4 text-slate-100 dark:bg-gradient-to-b dark:to-95% lg:flex"
-    style={{ backgroundColor: '#DADAFF', color: 'black', marginTop: '35.59px' }}
+    style={{ backgroundColor: '#DADAFF', color: 'black', marginTop: '36px', fontFamily: 'Barlow, sans-serif' }}
   >
   
       <ul className="m-auto flex flex-grow flex-col items-center justify-start gap-[6px]">

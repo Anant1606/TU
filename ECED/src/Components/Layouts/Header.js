@@ -54,7 +54,7 @@ const Header = () => {
 
         {/* Research Paper Button */}
         <Link
-          to="/dash/ResPaper"
+          to="/dash/ResearchPaperDisplay"
           className="flex items-center gap-1 text-lg font-semibold text-red-500 hover:text-red-700"
         >
           <FaFileAlt className="text-xl" />
