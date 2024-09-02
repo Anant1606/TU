@@ -41,7 +41,7 @@ const ConferenceForm = () => {
   const addConference = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/conference/conference", newConference);
+      const response = await axios.post("/Conference/add", newConference);
       navigate("./..");
       toast.success(response.data.message);
     } catch (err) {
