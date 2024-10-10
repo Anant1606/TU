@@ -40,6 +40,7 @@ app.use("/reserchgarnt",require("./routes/reserchgrantRoutes"));
 app.use("/patent",require("./routes/patent"));
 app.use("/reserchaward",require("./routes/reserchinnovationaward"));
 app.use("/journal",require("./routes/Journal"));
+app.use("/filter",require("./routes/filter"));
 app.use("/book",require("./routes/bookRoutes"));
 app.use("./consultancy",require("./routes/consultancy"));
 app.use("./Econtent",require("./routes/Econtent"));

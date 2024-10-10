@@ -32,6 +32,5 @@ const patentSchema = new mongoose.Schema({
   timestamps: true, // Automatically adds createdAt and updatedAt fields
 });
 
-const Patent = mongoose.model('Patent', patentSchema);
-
-module.exports = Patent;
+// Check if the model is already compiled, if not, compile it
+module.exports = mongoose.models.Patent || mongoose.model('Patent', patentSchema);

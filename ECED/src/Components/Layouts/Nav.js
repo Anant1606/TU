@@ -72,6 +72,12 @@ const Nav = () => {
                 View Your Reserch Paper
               </li>
             </NavLink>
+            <NavLink to={"./filter"} className="w-full font-medium">
+              <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
+                <RiUserAddLine className="pt-[0.1rem] text-2xl  " />
+                Filter
+              </li>
+            </NavLink>
           </>
         )}
         {user.role === "student" && (

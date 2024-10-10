@@ -42,6 +42,7 @@ import SupportForm from "./Components/Forms/SupportForm";
 import ConferenceForm from "./Components/Forms/ConferenceForm";
 import FacultyDevelopmentForm from "./Components/Forms/FacultyDevelopmentForm";
 import ResearchPaperDisplay from "./Components/Forms/ResearchPaperDisplay";
+import FilterUsers from "./Components/Forms/filter";
 
 
 
@@ -86,6 +87,7 @@ function App() {
           <Route path="ConferenceForm" element={<ConferenceForm/>} />
           <Route path="FacultyDevelopmentForm" element={<FacultyDevelopmentForm/>} />          
           <Route path="ResearchPaperDisplay" element={<ResearchPaperDisplay/>} />
+          <Route path="filter" element={<FilterUsers/>}/>
 
           <Route
             path="approve_teacher"

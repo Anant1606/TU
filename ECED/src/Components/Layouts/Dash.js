@@ -94,6 +94,18 @@ const Dash = () => {
         </Link>
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./filter"}
+        >
+          <FaFileAlt className="text-[2.5rem] lg:text-[4rem]" />
+          <div className="font-semibold">
+           Filter
+            <p className="text-sm font-normal lg:text-base ">
+              Filter according to you
+            </p>
+          </div>
+        </Link>
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./fellowship"}
         >
           <FaMedal className="text-[2.5rem] lg:text-[4rem]" />

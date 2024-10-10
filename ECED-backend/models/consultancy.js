@@ -32,6 +32,5 @@ const consultancySchema = new mongoose.Schema(
   }
 );
 
-const Consultancy = mongoose.model("Consultancy", consultancySchema);
-
-module.exports = Consultancy;
+// Check if the model already exists before compiling it again
+module.exports = mongoose.models.Consultancy || mongoose.model("Consultancy", consultancySchema);
