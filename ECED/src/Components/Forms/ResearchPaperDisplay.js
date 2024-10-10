@@ -15,7 +15,7 @@ const ResearchPaperDisplay = () => {
   useEffect(() => {
     const fetchResearchPapers = async () => {
       try {
-        const response = await axios.get(`/ReserchPaper/research-papers/${user.department}`);
+        const response = await axios.get(`/ReserchPaper/research-paper`);
         const papers = response.data;
 
         // Fetch the download URL for each research paper
