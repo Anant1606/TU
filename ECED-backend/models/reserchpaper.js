@@ -6,37 +6,40 @@ const respaperSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
-  year:{
+  year: {
     type: String,
     required: true,
   },
-  paper:{
+  paper: {
     type: String,
     required: true,
   },
-  title:{
+  title: {
     type: String,
     required: true,
   },
- 
- issnno:{
-  type: String,
+  issnno: {
+    type: String,
     required: true,
- },
- publisher:{
-  type: String,
-  required: true,
- },
- link :{
-  type: String,
-  required: true,
- },
-
+  },
+  publisher: {
+    type: String,
+    required: true,
+  },
+  link: {
+    type: String,
+    required: true,
+  },
   teacher: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Teacher",
+    required: true, // Ensure a teacher is always associated
   },
+}, {
+  timestamps: true, // Automatically adds createdAt and updatedAt fields
 });
 
-module.exports = mongoose.model("resPaper", respaperSchema);
+// Ensure the model is defined only once
+const ResPaper = mongoose.models.resPaper || mongoose.model("resPaper", respaperSchema);
+
+module.exports = ResPaper;

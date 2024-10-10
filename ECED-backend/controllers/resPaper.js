@@ -1,26 +1,32 @@
-const { mongoose } = require("mongoose");
-const ResearchPaper = require("./../models/reserchpaper"); // Assuming the model name is 'ResearchPaper'
+const mongoose = require("mongoose"); // Correct import
+const ResearchPaper = require("./../models/reserchpaper"); // Make sure the model name is correct
 const asyncHandler = require("express-async-handler");
 
 const getResearchPapers = asyncHandler(async (req, res) => {
   if (!req.params.teacherId) {
     return res.status(400).json({ message: "Teacher ID Missing" });
   }
+  
   const researchPapers = await ResearchPaper.find({
     teacher: req.params.teacherId,
   })
     .select("-students")
     .exec();
+  
   if (!researchPapers || researchPapers.length === 0) {
     return res.status(404).json({
       message: `No Research Paper(s) found`,
     });
   }
+  
   res.json(researchPapers);
 });
 
-
 const getAllPapers = asyncHandler(async (req, res) => {
+  const studentId = req.params.studentId;
+
+
+
   const papers = await ResearchPaper.aggregate([
     {
       $lookup: {
@@ -42,19 +48,24 @@ const getAllPapers = asyncHandler(async (req, res) => {
         students: 1,
         department: 1,
         joined: {
-          $in: [mongoose.Types.ObjectId(req.params.studentId), "$students"],
+          $cond: {
+            if: { $isArray: "$students" }, // Check if 'students' is an array
+            then: { $in: [new mongoose.Types.ObjectId(studentId), "$students"] },
+            else: false // Return false if not an array
+          }
         },
       },
     },
   ]);
+
   if (!papers || papers.length === 0) {
     return res.status(404).json({
       message: `No Paper(s) found`,
     });
   }
+
   res.json(papers);
 });
-
 
 const getPaper = asyncHandler(async (req, res) => {
   if (!req.params.paperId) {
@@ -62,31 +73,29 @@ const getPaper = asyncHandler(async (req, res) => {
       .status(400)
       .json({ message: "Incomplete Request: Params Missing" });
   }
+  
   const paper = await ResearchPaper.findOne({
     _id: req.params.paperId,
   })
     .populate({ path: "teacher", select: "name" })
     .populate({ path: "students", select: "name" })
     .exec();
+  
   if (!paper) {
     return res.status(404).json({
       message: `No Paper(s) found`,
     });
   }
+  
   res.json(paper);
 });
 
-
 const addPaper = asyncHandler(async (req, res) => {
-  const { department, semester, year, paper, students, teacher,title,issnno,publisher,link } = req.body;
+  const { department, semester, year, paper, students, teacher, title, issnno, publisher, link } = req.body;
 
   // Confirm Data
-  if (!department || !paper  || !year  || !teacher ||!title || !issnno ||!publisher ||!link) {
-    return res
-      .status(400)
-      .json({ message: "Incomplete Request: Fields Missing" });
-
-    
+  if (!department || !paper || !year || !teacher || !title || !issnno || !publisher || !link) {
+    return res.status(400).json({ message: "Incomplete Request: Fields Missing" });
   }
 
   // Check for Duplicates
@@ -109,7 +118,7 @@ const addPaper = asyncHandler(async (req, res) => {
     title,
     issnno,
     publisher,
-    link
+    link,
   };
 
   // Create and Store New Paper
@@ -123,7 +132,6 @@ const addPaper = asyncHandler(async (req, res) => {
     res.status(400).json({ message: "Invalid data received" });
   }
 });
-
 
 const deletePaper = asyncHandler(async (req, res) => {
   const { id } = req.body;
