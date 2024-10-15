@@ -43,6 +43,7 @@ import ConferenceForm from "./Components/Forms/ConferenceForm";
 import FacultyDevelopmentForm from "./Components/Forms/FacultyDevelopmentForm";
 import ResearchPaperDisplay from "./Components/Forms/ResearchPaperDisplay";
 import FilterUsers from "./Components/Forms/filter";
+import ResearchPaperDetail from "./Components/Queries/singlerespaper"
 
 
 
@@ -63,7 +64,8 @@ function App() {
           <Route path="reg_teacher" element={<TeacherForm />} />
           <Route path="reg_student" element={<StudentForm />} />
         </Route>
-        
+        <Route path="/research-paper/:id" element={<ResearchPaperDetail />} />
+
         <Route
           path="/dash"
           element={<Layout />}
@@ -88,6 +90,7 @@ function App() {
           <Route path="FacultyDevelopmentForm" element={<FacultyDevelopmentForm/>} />          
           <Route path="ResearchPaperDisplay" element={<ResearchPaperDisplay/>} />
           <Route path="filter" element={<FilterUsers/>}/>
+
 
           <Route
             path="approve_teacher"

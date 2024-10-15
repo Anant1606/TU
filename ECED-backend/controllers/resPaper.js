@@ -68,27 +68,30 @@ const getAllPapers = asyncHandler(async (req, res) => {
 });
 
 const getPaper = asyncHandler(async (req, res) => {
-  if (!req.params.paperId) {
+  if (!req.params.respaperId) {
     return res
       .status(400)
       .json({ message: "Incomplete Request: Params Missing" });
   }
-  
+
   const paper = await ResearchPaper.findOne({
-    _id: req.params.paperId,
+    _id: req.params.respaperId,
   })
-    .populate({ path: "teacher", select: "name" })
-    .populate({ path: "students", select: "name" })
+    .populate({ path: "teacher", select: "name" }) // Populate only the teacher as per your schema
     .exec();
-  
+
   if (!paper) {
     return res.status(404).json({
-      message: `No Paper(s) found`,
+      message: "No Paper(s) found",
     });
   }
-  
+
   res.json(paper);
 });
+
+
+
+
 
 const addPaper = asyncHandler(async (req, res) => {
   const { department, semester, year, paper, students, teacher, title, issnno, publisher, link } = req.body;

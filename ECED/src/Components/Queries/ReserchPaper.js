@@ -41,7 +41,10 @@ const ResPaper = () => {
       {Array.isArray(resPaper) && resPaper.length > 0 ? (
         <section className="pt-4">
           {resPaper.map((resPaperItem) => (
-            <Link to={resPaperItem.link} key={resPaperItem._id} onClick={() => setResPaper(resPaperItem)}>
+            <Link
+              to={`/research-paper/${resPaperItem._id}`}  // Use the paper ID for dynamic route
+              key={resPaperItem._id}
+            >
               <article className="mb-4 flex items-center rounded-md border-2 border-slate-900 bg-violet-200 p-2 hover:bg-violet-950 hover:text-slate-100 dark:border-slate-200 dark:bg-slate-950/5 dark:hover:border-slate-200 dark:hover:bg-slate-950/80">
                 <AiFillBook className="text-[3rem]" />
                 <div>
