@@ -5,6 +5,8 @@ import axios from "../../config/api/axios";
 import { FaUniversity } from "react-icons/fa";
 import { PiStudentThin, PiUserThin, PiSpinnerGapBold } from "react-icons/pi";
 import ErrorStrip from "../ErrorStrip";
+import { Link } from "react-router-dom";
+import Contributors from "./contributers";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -182,6 +184,13 @@ const Login = () => {
           }} >
             <p>&copy; {new Date().getFullYear()} Department of Electronics and Communication Engineering, TIET</p>
             <p>Developed by DECE TIET</p>
+            <Link className="font-semibold text-violet-600 decoration-2 hover:underline focus:underline dark:text-violet-400"
+              to={"./contributers"}
+            >
+              View Contributors
+            </Link>
+
+           
           </footer>
 
         </main>
