@@ -44,7 +44,7 @@ import FacultyDevelopmentForm from "./Components/Forms/FacultyDevelopmentForm";
 import ResearchPaperDisplay from "./Components/Forms/ResearchPaperDisplay";
 import FilterUsers from "./Components/Forms/filter";
 import ResearchPaperDetail from "./Components/Queries/singlerespaper"
-
+import Contributors from "./Components/Forms/contributers";
 
 
 
@@ -90,6 +90,7 @@ function App() {
           <Route path="FacultyDevelopmentForm" element={<FacultyDevelopmentForm/>} />          
           <Route path="ResearchPaperDisplay" element={<ResearchPaperDisplay/>} />
           <Route path="filter" element={<FilterUsers/>}/>
+          <Route path="contributors" element={<Contributors />} />
 
 
           <Route
