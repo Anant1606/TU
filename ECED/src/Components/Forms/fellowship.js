@@ -57,10 +57,11 @@ const FellowshipForm = () => {
     <>
       {user.role === "HOD" || user.role === "admin" || user.role === "teacher" ? (
         <main className="fellowship-form" style={{ color: "black" }}>
-          <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
+          <h2 className="mb-6 text-center whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
             Add Fellowship
           </h2>
           <form className="w-full md:w-1/3" onSubmit={addFellowship}>
+          
             <label htmlFor="name">Name of Fellowship:</label>
             <input
               className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400"

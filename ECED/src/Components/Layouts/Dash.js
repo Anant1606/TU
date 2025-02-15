@@ -41,9 +41,9 @@ const Dash = () => {
         >
           <GiBookshelf className="text-[2.5rem] lg:text-[4rem] " />
           <div className="font-semibold">
-            Papers
+            Journals Publication
             <p className="text-sm font-normal lg:text-base ">
-              View Papers and Notes
+              Add your Journals/Conference Publication
             </p>
           </div>
         </Link>

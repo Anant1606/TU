@@ -16,7 +16,7 @@ const Nav = () => {
   return (
     <nav
     id="nav"
-    className="z-0 hidden h-full flex-col justify bg-slate-950 px-4 py-4 text-slate-100 dark:bg-gradient-to-b dark:to-95% lg:flex"
+    className="z-0 hidden h-screen flex-col justify bg-slate-950 px-4 py-4 text-slate-100 dark:bg-gradient-to-b dark:to-95% lg:flex"
     style={{ backgroundColor: '#DADAFF', color: 'black', marginTop: '36px', fontFamily: 'Barlow, sans-serif' }}
   >
   
@@ -90,7 +90,7 @@ const Nav = () => {
         )}
       </ul>
       <ul className="flex flex-grow flex-col items-start justify-end gap-[6px]">
-        <NavLink to={"./profile"} className="w-full font-medium">
+        <NavLink to={"./profile"} className="w-full font-bold">
           <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
             {user.role === "student" ? (
               <PiStudent className="pt-[0.1rem] text-2xl" />
